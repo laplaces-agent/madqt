@@ -1,0 +1,10 @@
+build/
+compile_commands.json
+rust/target/
+flatpak/org.xeyes.madqt.yml
+flatpak-build/
+flatpak-repo/
+*.flatpak
+.claude/
+rust/vendor/
+STYLING.md

@@ -1,0 +1,60 @@
+app-id: org.xeyes.madqt
+runtime: org.kde.Platform
+runtime-version: '6.10'
+sdk: org.kde.Sdk
+base: io.qt.qtwebengine.BaseApp
+base-version: '6.10'
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
+command: madqt
+
+finish-args:
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --device=dri           # GPU acceleration for QtWebEngine
+  - --filesystem=home:ro   # open markdown files; use host:ro for broader access
+
+modules:
+
+  # ── Corrosion (CMake/Cargo bridge) ────────────────────────────────────────
+  - name: corrosion
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCORROSION_BUILD_TESTS=OFF
+    build-options:
+      append-path: /usr/lib/sdk/rust-stable/bin
+    cleanup:
+      - /lib/cmake
+    sources:
+      - type: git
+        url: https://github.com/corrosion-rs/corrosion.git
+        commit: 1499b14e4906a2890f5cee1547c8848db261753d
+
+  # ── madqt ─────────────────────────────────────────────────────────────────
+  - name: madqt
+    buildsystem: simple
+    build-options:
+      append-path: /usr/lib/sdk/rust-stable/bin
+      env:
+        # cargo-sources.json unpacks the crates into cargo/vendor and writes the
+        # source-replacement config to cargo/config, both relative to the build
+        # dir, so CARGO_HOME has to be that same cargo/ directory.
+        CARGO_HOME: /run/build/madqt/cargo
+    build-commands:
+      - cmake -B _build -S . -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/app
+      - ninja -C _build
+      - ninja -C _build install
+    sources:
+      - type: dir
+        path: @CMAKE_SOURCE_DIR@
+      # Every crate needed offline, pinned by URL and sha256 so flatpak-builder
+      # fetches and verifies them before the build starts. Source replacement is
+      # global, so this must be the union of rust/Cargo.lock and cxxbridge-cmd's
+      # own lockfile -- Corrosion resolves that one separately via
+      # `cargo install cxxbridge-cmd --locked`, and it pins older versions of
+      # clap, syn and friends than the library does. Regenerate with
+      # flatpak-cargo-generator.py over both lockfiles when either changes.
+      - cargo-sources.json

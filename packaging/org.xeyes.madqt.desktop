@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=madqt
+GenericName=Markdown Viewer
+Comment=Read-only markdown viewer
+Exec=madqt %f
+Icon=org.xeyes.madqt
+Terminal=false
+Categories=Office;Viewer;Qt;
+MimeType=text/markdown;
+StartupWMClass=madqt
+SingleMainWindow=true

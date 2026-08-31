@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file alias="madqt.svg">../packaging/org.xeyes.madqt.svg</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,41 @@
+name: Build Flatpak
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Branch, tag, or commit SHA to build'
+        required: false
+        default: ''
+
+jobs:
+  flatpak:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:kde-6.10
+      options: --privileged
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.ref || github.ref }}
+
+      - name: Generate flatpak manifest
+        run: sed "s|@CMAKE_SOURCE_DIR@|$PWD|g" flatpak/org.xeyes.madqt.yml.in > flatpak/org.xeyes.madqt.yml
+
+      # The kde-6.10 image ships the KDE runtime and SDK but not the
+      # QtWebEngine BaseApp the manifest declares, nor the rust-stable SDK
+      # extension, so let flatpak-builder resolve whatever the manifest needs.
+      - name: Build Flatpak
+        run: flatpak-builder --install-deps-from=flathub --repo=flatpak-repo --force-clean --disable-rofiles-fuse flatpak-build flatpak/org.xeyes.madqt.yml
+
+      - name: Create Flatpak bundle
+        run: flatpak build-bundle flatpak-repo madqt.flatpak org.xeyes.madqt
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: madqt-flatpak
+          path: madqt.flatpak

@@ -1,0 +1,30 @@
+<RCC>
+    <qresource prefix="/fonts">
+        <file alias="SourceSans3-Regular.ttf">fonts/SourceSans3-Regular.ttf</file>
+        <file alias="SourceSans3-It.ttf">fonts/SourceSans3-It.ttf</file>
+        <file alias="SourceSans3-Semibold.ttf">fonts/SourceSans3-Semibold.ttf</file>
+        <file alias="SourceSans3-Bold.ttf">fonts/SourceSans3-Bold.ttf</file>
+        <file alias="SourceSans3-BoldIt.ttf">fonts/SourceSans3-BoldIt.ttf</file>
+        <file alias="SourceSerif4-Regular.ttf">fonts/SourceSerif4-Regular.ttf</file>
+        <file alias="SourceSerif4-It.ttf">fonts/SourceSerif4-It.ttf</file>
+        <file alias="SourceSerif4-Semibold.ttf">fonts/SourceSerif4-Semibold.ttf</file>
+        <file alias="SourceSerif4-Bold.ttf">fonts/SourceSerif4-Bold.ttf</file>
+        <file alias="SourceSerif4-BoldIt.ttf">fonts/SourceSerif4-BoldIt.ttf</file>
+        <file alias="JetBrainsMono-Variable.ttf">fonts/JetBrainsMono-Variable.ttf</file>
+        <file alias="JetBrainsMono-Italic-Variable.ttf">fonts/JetBrainsMono-Italic-Variable.ttf</file>
+        <file alias="IBMPlexSans-Regular.ttf">fonts/IBMPlexSans-Regular.ttf</file>
+        <file alias="IBMPlexSans-Italic.ttf">fonts/IBMPlexSans-Italic.ttf</file>
+        <file alias="IBMPlexSans-SemiBold.ttf">fonts/IBMPlexSans-SemiBold.ttf</file>
+        <file alias="IBMPlexSans-Bold.ttf">fonts/IBMPlexSans-Bold.ttf</file>
+        <file alias="IBMPlexSans-BoldItalic.ttf">fonts/IBMPlexSans-BoldItalic.ttf</file>
+        <file alias="IBMPlexSerif-Regular.ttf">fonts/IBMPlexSerif-Regular.ttf</file>
+        <file alias="IBMPlexSerif-Italic.ttf">fonts/IBMPlexSerif-Italic.ttf</file>
+        <file alias="IBMPlexSerif-SemiBold.ttf">fonts/IBMPlexSerif-SemiBold.ttf</file>
+        <file alias="IBMPlexSerif-Bold.ttf">fonts/IBMPlexSerif-Bold.ttf</file>
+        <file alias="IBMPlexSerif-BoldItalic.ttf">fonts/IBMPlexSerif-BoldItalic.ttf</file>
+        <file alias="IBMPlexMono-Regular.ttf">fonts/IBMPlexMono-Regular.ttf</file>
+        <file alias="IBMPlexMono-Italic.ttf">fonts/IBMPlexMono-Italic.ttf</file>
+        <file alias="IBMPlexMono-SemiBold.ttf">fonts/IBMPlexMono-SemiBold.ttf</file>
+        <file alias="IBMPlexMono-Bold.ttf">fonts/IBMPlexMono-Bold.ttf</file>
+    </qresource>
+</RCC>
